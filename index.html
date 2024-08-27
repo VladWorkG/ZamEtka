@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZamEtka</title>
+    <link rel="stylesheet" href="style.css">
+    <title>ZamEtkaPRO</title>
 </head>
 <body>
-    <header class="header">
-        <div align="center" class="logo">
-            <h1 style="user-select: none;"><span class="l1">Zam</span><span class="l2">Etka</span></h1>
+    <header>
+        <div>
+            <Span class="logo1">Zam</Span><Span class="logo2">Etka</Span>
         </div>
     </header>
-    <main class="main">
+    <main>
 
-        <div id="notes-list" class="grid">
-            <div id="note-input" class="fixed-note" style="display: flex; justify-content: center; align-items: center;">
-                    <span class="C">+</span>
+        <div id="notes-list">
+            <div id="note-input" class="fixed-note">
+                <span>+</span>
             </div>
-
             </div>
             <!-- Здесь будут отображаться заметки -->
         </div>
@@ -26,239 +26,6 @@
     <footer>
 
     </footer>
-
-    <script>
-        let notes = JSON.parse(localStorage.getItem('notes')) || [];
-
-        // Функция для отображения заметок из localStorage
-        function displayNotes() {
-            const notesList = document.getElementById('notes-list');
-            
-            notes.forEach((note, index) => {
-                const newNote = createNoteElement(note.content, note.color, index);
-                notesList.insertBefore(newNote, notesList.lastElementChild);
-            });
-        }
-
-        // Функция для отображения заметок из localStorage
-        function displayNotes() {
-            const notesList = document.getElementById('notes-list');
-            notesList.innerHTML = ''; // Очищаем список перед повторным заполнением
-            
-            notes.forEach((note, index) => {
-                const newNote = createNoteElement(note.content, note.color, index);
-                notesList.insertBefore(newNote, notesList.lastElementChild);
-            });
-        }
-
-        document.getElementById('note-input').addEventListener('click', function() {
-            // Создаем новый элемент для заметки
-            const newNote = document.createElement('div');
-            newNote.classList.add('note');
-            function getRandomArbitrary(min, max) {
-                let i = Math.round(Math.random() * (max - min) + min);
-                if (i == 1) {
-                    return 'white';
-                } else if (i == 2) {
-                    return 'red'; 
-                } else if (i == 3)  {
-                    return 'blue';
-                } else if (i == 4) {
-                    return 'yellow'; 
-                } else if (i == 5) {
-                    return 'pink'; 
-                } else {
-                    return 'green';
-                } 
-            }
-            newNote.classList.add(getRandomArbitrary(1, 6))
-
-             // Создаем содержимое заметки
-            const noteContent = document.createElement('div');
-            noteContent.classList.add('note-content');
-            noteContent.setAttribute('contenteditable', 'true');
-            noteContent.innerText = "To do:";
-
-            // Создаем кнопку для удаления заметки
-            const deleteZone = document.createElement('div');
-            deleteZone.classList.add('zone');
-
-            
-
-
-            const deleteButton = document.createElement('div');
-            deleteButton.innerText = 'Delete';
-            deleteButton.classList.add('delete-button');
-            deleteButton.classList.add('delete');
-
-            deleteZone.appendChild(deleteButton);
-
-            // Добавляем событие на кнопку удаления
-            deleteButton.addEventListener('click', function() {
-                notesList.removeChild(newNote);
-            });
-
-            // Добавляем содержимое и кнопку в заметку
-            newNote.appendChild(noteContent);
-            newNote.appendChild(deleteZone);
-            newNote.appendChild(deleteButton);
-
-            // Добавляем заметку в список перед кнопкой создания новой заметки
-            const notesList = document.getElementById('notes-list');
-            notesList.insertBefore(newNote, notesList.lastElementChild);
-        });
-        
-    </script>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-        * {
-        margin: 0;
-        padding: 0;
-        }
-        body {
-            font-family: Roboto, sans-serif;
-            margin: 0;
-            padding: 0px;
-            background-color: #f0f0f0;
-        }
-        #note-input {
-            margin-bottom: 00px;
-            min-width: 250px;
-            max-height: 320px;
-            background-color: rgb(220, 251, 255);
-            min-width: 250px;
-            min-height: 250px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            user-select: none;
-            color: #909090;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        #note-input:hover {
-            background-color: rgb(244, 254, 255);
-            user-select: none;
-            color: #000000;
-        }
-        .no-select {
-            user-select: none;      /* Отключает выделение текста */
-            pointer-events: none;   /* Отключает события мыши */
-        }
-        .delete {
-            height: 50px;
-            width: auto;
-            color: #c3c3c300;
-            display: flex; 
-            justify-content: center; 
-            border-radius: 7px;
-            user-select: none;
-            align-items: center;
-        }
-        .delete:hover {
-            height: 50px;
-            user-select: none;
-            width: auto;
-            color: #000000;
-            border-radius: 7px;
-            background-color: rgb(255, 116, 116);
-        }
-        .zone {
-            min-width: auto;
-            min-height: auto;
-            align-items: end;
-            caret-color: transparent;
-            justify-content: end;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 7px;
-        }
-        .C {
-            font-size: 80px;
-            user-select: none;
-        }
-        .header {
-            height: 60px;
-            margin: 0;
-            padding: 0;
-            background-color: rgb(140, 228, 255);
-        }
-        .main {
-            margin-top: 15px;
-        }
-        .l1 {
-            color: rgb(60, 58, 69);
-            caret-color: transparent;
-        }
-        .l2 {
-            color: rgb(255, 255, 255);
-            caret-color: transparent;
-        }
-        .logo {
-            padding-top: 2px;
-            font-size: 21px;
-            font-weight: bolder;
-        }
-        .add-no {
-            font-size: 90px;
-            min-width: 250px;
-            min-height: 250px;
-            max-height: 300px;
-            -webkit-appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            border: 0;
-            border-radius: 0;
-            background-color: rgb(220, 251, 255);
-            color: #2a2a2ac7;
-
-        }
-        .add-no:hover {
-            background-color: rgb(199, 248, 255);
-            color: #3e3e3e;
-        }
-        .note {
-            min-width: 250px;
-            min-height: 250px;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .note-content {
-            min-height: 50px;
-        }
-        .note-content[contenteditable="true"] {
-            border: 1px dashed #ff000000;
-            padding: 5px;
-            cursor: text;
-        }
-        .grid {
-        display: grid;
-        grid-gap: 10px;
-        margin-right: 10px;
-        margin-left: 10px;
-        min-width: 250px;
-        grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-        }
-        .white {
-            background-color: white;
-        }
-        .red {
-            background-color: rgb(255, 222, 222);
-        }
-        .blue {
-            background-color: rgb(222, 251, 255);
-        }
-        .yellow {
-            background-color: rgb(246, 255, 222);
-        }
-        .pink {
-            background-color: rgb(255, 222, 255);
-        }
-        .green {
-            background-color: rgb(202, 252, 209);
-        }
-    </style>
 </body>
+    <script src="script.js"></script>
 </html>
